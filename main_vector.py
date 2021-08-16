@@ -31,3 +31,5 @@ if __name__ == '__main__':
         zero.normalize()
     except ZeroDivisionError:
         print("cannot normalize zero vector{}".format(zero))
+
+    print(vec.dot(vec2))

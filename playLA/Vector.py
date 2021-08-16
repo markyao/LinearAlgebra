@@ -22,10 +22,16 @@ class Vector:
             raise ZeroDivisionError("向量模不能为零")
         return Vector(self._values) / self.norm()
 
+    def dot(self, other):
+        """返回两个向量点乘"""
+        assert len(self) == len(other), \
+            "向量长度需要相等"
+        return sum(a * b for a, b in zip(self, other))
+
     def __add__(self, other):
         """向量加法"""
         assert len(self) == len(other), \
-            "向量长度比较相等"
+            "向量长度需要相等"
         return Vector([a + b for a, b in zip(self, other)])
 
     def __mul__(self, k):
