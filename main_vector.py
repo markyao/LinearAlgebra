@@ -21,3 +21,4 @@ if __name__ == '__main__':
     print(zero)
     print("{} + {} = {}".format(vec, zero, vec + zero))
 
+    print("norm({}) = {}".format(vec, vec.norm()))

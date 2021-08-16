@@ -1,3 +1,6 @@
+import math
+
+
 class Vector:
 
     def __init__(self, lst):
@@ -7,6 +10,10 @@ class Vector:
     def zero(cls, dim):
         """返回一个dim维度的向量"""
         return cls([0] * dim)
+
+    def norm(self):
+        """返回向量的模"""
+        return math.sqrt(sum(e ** 2 for e in self))
 
     def __add__(self, other):
         """向量加法"""
