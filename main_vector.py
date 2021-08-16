@@ -22,3 +22,12 @@ if __name__ == '__main__':
     print("{} + {} = {}".format(vec, zero, vec + zero))
 
     print("norm({}) = {}".format(vec, vec.norm()))
+    print("norm({}) = {}".format(zero, zero.norm()))
+
+    print("normalize {} = {}".format(vec, vec.normalize()))
+    print(vec.normalize().norm())
+
+    try:
+        zero.normalize()
+    except ZeroDivisionError:
+        print("cannot normalize zero vector{}".format(zero))
