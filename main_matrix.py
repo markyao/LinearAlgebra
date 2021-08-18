@@ -10,3 +10,9 @@ if __name__ == '__main__':
 
     print("matrix.row_vector(0) = {}".format(mat.row_vector(0)))
     print("matrix.col_vector(0) = {}".format(mat.col_vector(0)))
+
+    mat2 = Matrix([[5, 6], [7, 8]])
+    print("matrix.add: {}".format(mat + mat2))
+    print("matrix.sub: {}".format(mat - mat2))
+    print("matrix.scalar: {}".format(mat * 2))
+    print("zero_2_3:{}".format(Matrix.zero(2, 3)))
