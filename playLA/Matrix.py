@@ -25,6 +25,20 @@ class Matrix:
         return Matrix([[a - b for a, b in zip(self.row_vector(i), other.row_vector(i))]
                        for i in range(self.row_num())])
 
+    def dot(self, other):
+        """返回矩阵乘法的结果"""
+        if isinstance(other, Vector):
+            # 矩阵和向量的乘法
+            assert self.col_num() == len(other), \
+                "矩阵的列数必须和向量行数相等"
+            return Vector([self.row_vector(i).dot(other) for i in range(self.row_num())])
+        if isinstance(other, Matrix):
+            # 矩阵和矩阵乘法
+            assert self.col_num() == len(other), \
+                "矩阵的列数必须和另一个矩阵行数相等"
+            return Matrix([[self.row_vector(i).dot(other.col_vector(j)) for j in range(self.col_num())]
+                           for i in range(self.row_num())])
+
     def __mul__(self, k):
         """返回矩阵的数量乘法：self * k"""
         return Matrix([[k * e for e in self.row_vector(i)]
