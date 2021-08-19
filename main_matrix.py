@@ -21,3 +21,6 @@ if __name__ == '__main__':
 
     vec = Vector([1, 2])
     print(mat.dot(vec))
+
+    p = Matrix([[0, 1, 2], [1, 1, 3]])
+    print("p.T = {}".format(p.T()))

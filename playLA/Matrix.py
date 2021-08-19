@@ -11,6 +11,11 @@ class Matrix:
         """返回一个r行3列的矩阵"""
         return Matrix([[0] * c for _ in range(r)])
 
+    def T(self):
+        """返回转置矩阵"""
+        return Matrix([[e for e in self.col_vector(i)]
+                       for i in range(self.col_num())])
+
     def __add__(self, other):
         """返回矩阵的加法"""
         assert self.shape() == other.shape(), \
