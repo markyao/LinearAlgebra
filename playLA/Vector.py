@@ -1,4 +1,4 @@
-from ._global import EPSILON
+from ._global import is_zero
 import math
 
 
@@ -18,7 +18,7 @@ class Vector:
 
     def normalize(self):
         """返回向量的单位向量"""
-        if self.norm() < EPSILON:
+        if is_zero(self.norm()):
             raise ZeroDivisionError("向量模不能为零")
         return Vector(self._values) / self.norm()
 
