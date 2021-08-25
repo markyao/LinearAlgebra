@@ -28,6 +28,10 @@ class Vector:
             "向量长度需要相等"
         return sum(a * b for a, b in zip(self, other))
 
+    def underlying_list(self):
+        """返回vector底层列表"""
+        return self._values[:]
+
     def __add__(self, other):
         """向量加法"""
         assert len(self) == len(other), \
