@@ -1,4 +1,5 @@
 from .Vector import Vector
+from .Matrix import Matrix
 from ._global import is_zero
 
 
@@ -10,8 +11,12 @@ class LinearSystem:
         self._m = A.row_num()
         self._n = A.col_num()
 
-        self.Ab = [Vector(A.row_vector(i).underlying_list() + [b[i]])
-                   for i in range(self._m)]
+        if isinstance(b, Vector):
+            self.Ab = [Vector(A.row_vector(i).underlying_list() + [b[i]])
+                       for i in range(self._m)]
+        if isinstance(b, Matrix):
+            self.Ab = [Vector(A.row_vector(i).underlying_list() + b.row_vector(i).underlying_list())
+                       for i in range(self._m)]
         self.pivots = []
 
     def _max_row(self, index_i, index_j, m):
@@ -56,3 +61,16 @@ class LinearSystem:
         for i in range(self._m):
             print(" ".join(str(self.Ab[i][j]) for j in range(self._n)), end=" ")
             print("|", self.Ab[i][-1])
+
+
+def inv(A):
+    if A.row_num() != A.col_num():
+        return None
+
+    n = A.row_num()
+    ls = LinearSystem(A, Matrix.identity(n))
+    if not ls.gauss_jordan_elimination():
+        return None
+
+    inv = [[row[i] for i in range(n, 2 * n)] for row in ls.Ab]
+    return Matrix(inv)
