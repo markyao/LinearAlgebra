@@ -76,3 +76,4 @@ if __name__ == '__main__':
     invA = inv(A)
     print(invA)
     print(A.dot(invA))
+    print(invA.dot(A))
