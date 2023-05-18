@@ -5,12 +5,14 @@ from ._global import is_zero
 
 class LinearSystem:
 
-    def __init__(self, A, b):
-        assert A.row_num() == len(b), \
+    def __init__(self, A, b=None):
+        assert b is None or A.row_num() == len(b), \
             "矩阵A的行数需和向量b长度相等"
         self._m = A.row_num()
         self._n = A.col_num()
 
+        if b is None:
+            self.Ab = [A.row_vector(i) for i in range(self._m)]
         if isinstance(b, Vector):
             self.Ab = [Vector(A.row_vector(i).underlying_list() + [b[i]])
                        for i in range(self._m)]
@@ -74,3 +76,11 @@ def inv(A):
 
     inv = [[row[i] for i in range(n, 2 * n)] for row in ls.Ab]
     return Matrix(inv)
+
+
+def rank(A):
+    ls = LinearSystem(A)
+    ls.gauss_jordan_elimination()
+
+    zero = Vector.zero(A.col_num())
+    return sum([row != zero for row in ls.Ab])
